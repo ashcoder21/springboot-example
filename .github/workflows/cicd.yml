@@ -29,7 +29,7 @@ jobs:
         runs-on : [aws-ec2]
         steps:
             - name: pull image from dockerhub
-              run : docker pull ashdock/spring:latest
+              run : docker pull ashdock21/spring:latest
             - name: delete old container 
               run : docker rm -f spring-example-container
             - name: run docker container
