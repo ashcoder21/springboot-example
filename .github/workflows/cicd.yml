@@ -20,17 +20,17 @@ jobs:
             - name: Login To Dockerhub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             - name: Build Docker Image
-              run : docker build -t ashcod-spring .
+              run : docker build -t ashdock21/spring .
             - name : Push image to dockerhub
-              run: docker push ashcod-spring:latest
+              run: docker push ashdock21/spring:latest
 
     deploy:
         needs: build
         runs-on : [aws-ec2]
         steps:
             - name: pull image from dockerhub
-              run : docker pull ashcod/spring-example:latest
+              run : docker pull ashdock/spring:latest
             - name: delete old container 
               run : docker rm -f spring-example-container
             - name: run docker container
-              run: docker run -d -p 8080:8080 --name spring-example-container ashcod-spring:latest
+              run: docker run -d -p 8080:8080 --name spring-example-container ashdock21/spring:latest
